@@ -1,0 +1,69 @@
+version: '3'
+
+services:
+  db:
+    image: mariadb:latest
+    container_name: hubzilla_db
+    env_file:
+      - .env
+    environment:
+      MYSQL_ROOT_PASSWORD: ${ROOT_PASSWORD}  # Use variable from .env
+      MYSQL_DATABASE: ${DB_NAME}              # Use variable from .env
+      MYSQL_USER: ${DB_USER}                      # Use variable from .env
+      MYSQL_PASSWORD: ${DB_PASS}              # Use variable from .env        
+    networks:
+      - hubzilla
+    volumes:
+      - ./db_data:/var/lib/mysql
+    restart: always
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:  # Pass build arguments here
+        SSMTP_ROOT: ${SSMTP_ROOT}
+        SSMTP_MAILHUB: ${SSMTP_MAILHUB}
+        SSMTP_AUTHUSER: ${SSMTP_AUTHUSER}
+        SSMTP_AUTHPASS: ${SSMTP_AUTHPASS}
+        SSMTP_USESTARTTLS: ${SSMTP_USESTARTTLS}
+        SSMTP_FROMLINEOVERRIDE: ${SSMTP_FROMLINEOVERRIDE}
+        REVALIASES_ROOT: ${REVALIASES_ROOT}
+        REVALIASES_WWWDATA: ${REVALIASES_WWWDATA}      
+    image: hubzilla
+    container_name: hubzilla_app
+    environment:
+      HUBZILLA_DB_HOST: db
+      HUBZILLA_DB_USER: ${DB_USER}              # Use variable from .env
+      HUBZILLA_DB_PASS: ${DB_PASS}          # Use variable from .env
+      HUBZILLA_DB_NAME: ${DB_NAME}          # Use variable from .env
+      SSMTP_ROOT: ${SSMTP_ROOT}                  # Load from .env
+      SSMTP_MAILHUB: ${SSMTP_MAILHUB}            # Load from .env
+      SSMTP_AUTHUSER: ${SSMTP_AUTHUSER}          # Load from .env
+      SSMTP_AUTHPASS: ${SSMTP_AUTHPASS}          # Load from .env
+      SSMTP_USESTARTTLS: ${SSMTP_USESTARTTLS}    # Load from .env
+      SSMTP_FROMLINEOVERRIDE: ${SSMTP_FROMLINEOVERRIDE} # Load from .env
+      REVALIASES_ROOT: ${REVALIASES_ROOT}        # Load from .env
+      REVALIASES_WWWDATA: ${REVALIASES_WWWDATA}  # Load from .env     
+    env_file:
+      - .env
+    networks:
+      - nginx
+      - hubzilla
+    ports:
+      - 80
+    volumes:
+      - hubzilla_data:/var/www/html # Do not use bind mount as this will break git clone
+    depends_on:
+      - db
+    restart: always
+
+networks:
+  nginx:
+    name: nginx_default
+    external: true
+  hubzilla:
+
+volumes:
+  hubzilla_data:
+
