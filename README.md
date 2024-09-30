@@ -80,7 +80,7 @@ Using Docker for Hubzilla provides several advantages:
 - Upload size limit is controlled by custom-php.ini, currently set to 20MB. Change if needed to appropriate value.
 
 ## TODO
-
+- [ ] Optimize image size.
 - [ ] Option to add custom addon/theme repos.
 - [ ] Explore other database systems (Postgres, etc.)
 - [ ] Add option to enable apps, account quotas, and other configuration options.

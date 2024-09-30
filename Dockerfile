@@ -57,11 +57,6 @@ ENV SSMTP_ROOT=${SSMTP_ROOT} \
     REVALIASES_ROOT=${REVALIASES_ROOT} \
     REVALIASES_WWWDATA=${REVALIASES_WWWDATA}
 
-# Configure ssmtp using environment variables
-RUN envsubst < /etc/ssmtp/ssmtp.conf.template > /etc/ssmtp/ssmtp.conf && \
-    envsubst < /etc/ssmtp/revaliases.template > /etc/ssmtp/revaliases
-
-
 # Add Hubzilla cron job
 RUN echo "* * * * * www-data cd /var/www/html; php Zotlabs/Daemon/Master.php Cron > /dev/null 2>&1" >> /etc/crontab
 
