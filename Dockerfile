@@ -30,13 +30,8 @@ RUN a2enmod rewrite
 # Set working directory
 WORKDIR /var/www/html
 
-# Clone Hubzilla from the official repository
-RUN git clone https://framagit.org/hubzilla/core.git . \
-    && util/add_addon_repo https://framagit.org/hubzilla/addons addons-official 
-
 # Copy custom Apache configuration
 COPY ./apache-config.conf /etc/apache2/sites-available/000-default.conf
-
 
 # Copy the ssmtp template files
 COPY ssmtp.conf.template /etc/ssmtp/ssmtp.conf.template
@@ -65,10 +60,6 @@ ENV SSMTP_ROOT=${SSMTP_ROOT} \
 # Configure ssmtp using environment variables
 RUN envsubst < /etc/ssmtp/ssmtp.conf.template > /etc/ssmtp/ssmtp.conf && \
     envsubst < /etc/ssmtp/revaliases.template > /etc/ssmtp/revaliases
-
-# Set permissions
-RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 755 /var/www/html
 
 
 # Add Hubzilla cron job
