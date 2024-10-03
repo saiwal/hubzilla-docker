@@ -3,6 +3,7 @@
 ## Features:
 
 - Use Docker Compose to set up a fully functional [Hubzilla](https://hubzilla.org/page/info/discover) instance with just a few commands.
+- Multi-arch prebuilt images available for amd64, arm64, arm/v7.
 - Continuous Updates: The Docker image is built to allow for easy updates whenever new changes are made to the Hubzilla core or its dependencies.
 - SMTP Integration: Built-in support for sending emails using [ssmtp](https://wiki.archlinux.org/title/SSMTP), making it easy to configure email notifications for your Hubzilla instance.
 
@@ -21,18 +22,22 @@ cd hubzilla-docker
 
 - Configure Your Environment: Update the `.env` file with your SMTP and database details.
 - Build and Run the Container:
+
 ```
 docker compose up --build -d
 ```
-or the following if you need a clean rebuild:   
+
+or the following if you need a clean rebuild:
 
 ```
 docker build --no-cache -t hubzilla -f Dockerfile .
 docker compose up -d
 ```
+
 ### Using prebuilt image
 
-Replace the following 
+Replace the following
+
 ```
     build:
       context: .
@@ -45,25 +50,42 @@ Replace the following
         SSMTP_USESTARTTLS: ${SSMTP_USESTARTTLS}
         SSMTP_FROMLINEOVERRIDE: ${SSMTP_FROMLINEOVERRIDE}
         REVALIASES_ROOT: ${REVALIASES_ROOT}
-        REVALIASES_WWWDATA: ${REVALIASES_WWWDATA}     
+        REVALIASES_WWWDATA: ${REVALIASES_WWWDATA}
       image: hubzilla
 
 ```
 
 with:
+
 ```
 image: ghcr.io/skprg/hubzilla-docker:latest
 ```
 
 and to deploy:
+
 ```
 docker compose up -d
 ```
+
 Access Your Hubzilla Instance: Navigate to http://localhost (or the appropriate URL) to view your Hubzilla instance.
 
 ## Updating
 
-Simply recreate the container and it will pull the latest version of hubzilla from its repository and update addon/theme repositories.
+Simply restart the container and it will pull the latest version of hubzilla from its repository and update addon/theme repositories.
+
+```
+docker compsoe restart
+```
+
+## Advanced hub configuration
+
+To edit `.htconfig.php` for configuring advanced hubzilla features connect to conatiner using:
+
+```
+docker exec -it <hubzilla_container_name> bash
+```
+
+and use `nano` or `vim` to edit `.htconfig.php`
 
 ## Why Docker?
 
@@ -80,6 +102,7 @@ Using Docker for Hubzilla provides several advantages:
 - Upload size limit is controlled by custom-php.ini, currently set to 20MB. Change if needed to appropriate value.
 
 ## TODO
+
 - [ ] Optimize image size.
 - [ ] Option to add custom addon/theme repos.
 - [ ] Explore other database systems (Postgres, etc.)
