@@ -16,7 +16,7 @@ To get started with the project, simply follow these steps:
 - Clone the Repository:
 
 ```
-git clone https://github.com/skprg/hubzilla-docker.git
+git clone https://github.com/saiwal/hubzilla-docker.git
 cd hubzilla-docker
 ```
 
