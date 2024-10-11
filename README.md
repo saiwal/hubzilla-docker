@@ -74,7 +74,7 @@ Access Your Hubzilla Instance: Navigate to http://localhost (or the appropriate 
 Simply restart the container and it will pull the latest version of hubzilla from its repository and update addon/theme repositories.
 
 ```
-docker compsoe restart
+docker compose restart
 ```
 
 ## Advanced hub configuration
