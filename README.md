@@ -58,7 +58,7 @@ Replace the following
 with:
 
 ```
-image: ghcr.io/skprg/hubzilla-docker:latest
+image: ghcr.io/saiwal/hubzilla-docker:latest
 ```
 
 and to deploy:
