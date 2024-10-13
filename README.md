@@ -9,7 +9,7 @@
 
 ## Getting started
 
-To get started with the project, simply follow these steps:
+To get started with the project, simply follow these steps below or watch the [tutorial](https://videos.utsukta.org/w/6XWmLADJgtaLeuZ48twWuX).
 
 ### Building the image from scratch
 
