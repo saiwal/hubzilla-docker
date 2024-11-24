@@ -24,6 +24,10 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Lowercase-ify Repository Name
+        run: |
+          echo "REPO=${GITHUB_REPOSITORY@L}" >> "${GITHUB_ENV}"
+
       - name: Build and Push Multi-Arch Docker Image
         uses: docker/build-push-action@v6
         with:
@@ -31,4 +35,4 @@ jobs:
           cache-to: type=gha,mode=max
           platforms: linux/amd64,linux/arm64,linux/arm/v7
           push: true
-          tags: ghcr.io/${{ github.repository }}:latest
+          tags: ghcr.io/${REPO}:${{ github.sha }}
