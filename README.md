@@ -101,6 +101,10 @@ Using Docker for Hubzilla provides several advantages:
 - SMTP environment variables are necessary for admin registration. Make sure they are specified in the `.env` files correctly. Use app passwords if necessary for services with TFA(gmail, etc.).
 - Upload size limit is controlled by custom-php.ini, currently set to 20MB. Change if needed to appropriate value.
 
+## Known issues
+
+- If login doesn't persist, add the following to your proxy config `proxy_cookie_path / "/; Secure; HttpOnly; SameSite=None";`
+
 ## TODO
 
 - [ ] Optimize image size.
