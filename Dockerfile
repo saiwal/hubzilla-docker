@@ -27,6 +27,9 @@ COPY custom-php.ini /usr/local/etc/php/conf.d/uploads.ini
 # Enable Apache mod_rewrite
 RUN a2enmod rewrite
 
+# Enable Apache mod_headers
+RUN a2enmod headers
+
 # Set working directory
 WORKDIR /var/www/html
 
