@@ -72,4 +72,3 @@ EXPOSE 80
 # Start cron and Apache in the foreground
 CMD ["startup.sh"]
 
-
