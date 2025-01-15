@@ -79,7 +79,7 @@ docker compose restart
 
 ## Advanced hub configuration
 
-To edit `.htconfig.php` for configuring advanced hubzilla features connect to conatiner using:
+To edit `.htconfig.php` for configuring advanced hubzilla features connect to container using:
 
 ```
 docker exec -it <hubzilla_container_name> bash
