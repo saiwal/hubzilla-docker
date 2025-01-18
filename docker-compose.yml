@@ -18,19 +18,21 @@ services:
     restart: always
 
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-      args:  # Pass build arguments here
-        SSMTP_ROOT: ${SSMTP_ROOT}
-        SSMTP_MAILHUB: ${SSMTP_MAILHUB}
-        SSMTP_AUTHUSER: ${SSMTP_AUTHUSER}
-        SSMTP_AUTHPASS: ${SSMTP_AUTHPASS}
-        SSMTP_USESTARTTLS: ${SSMTP_USESTARTTLS}
-        SSMTP_FROMLINEOVERRIDE: ${SSMTP_FROMLINEOVERRIDE}
-        REVALIASES_ROOT: ${REVALIASES_ROOT}
-        REVALIASES_WWWDATA: ${REVALIASES_WWWDATA}      
-    image: hubzilla
+    ## Uncomment the following to build image locally.
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
+    #   args:  # Pass build arguments here
+    #     SSMTP_ROOT: ${SSMTP_ROOT}
+    #     SSMTP_MAILHUB: ${SSMTP_MAILHUB}
+    #     SSMTP_AUTHUSER: ${SSMTP_AUTHUSER}
+    #     SSMTP_AUTHPASS: ${SSMTP_AUTHPASS}
+    #     SSMTP_USESTARTTLS: ${SSMTP_USESTARTTLS}
+    #     SSMTP_FROMLINEOVERRIDE: ${SSMTP_FROMLINEOVERRIDE}
+    #     REVALIASES_ROOT: ${REVALIASES_ROOT}
+    #     REVALIASES_WWWDATA: ${REVALIASES_WWWDATA}      
+    # image: hubzilla
+    image: ghcr.io/saiwal/hubzilla-docker:latest
     container_name: hubzilla_app
     environment:
       HUBZILLA_DB_HOST: db

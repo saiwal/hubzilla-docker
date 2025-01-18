@@ -34,9 +34,16 @@ docker build --no-cache -t hubzilla -f Dockerfile .
 docker compose up -d
 ```
 
-### Using prebuilt image
+### building image
 
 Replace the following
+
+
+```
+image: ghcr.io/saiwal/hubzilla-docker:latest
+```
+
+with:
 
 ```
     build:
@@ -53,12 +60,6 @@ Replace the following
         REVALIASES_WWWDATA: ${REVALIASES_WWWDATA}
       image: hubzilla
 
-```
-
-with:
-
-```
-image: ghcr.io/saiwal/hubzilla-docker:latest
 ```
 
 and to deploy:
