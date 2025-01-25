@@ -9,9 +9,9 @@
 
 ## Getting started
 
-To get started with the project, simply follow these steps below or watch the [tutorial](https://videos.utsukta.org/w/6XWmLADJgtaLeuZ48twWuX).
+To get started with the project, simply follow these steps below.
 
-### Building the image from scratch
+### Deploying with prebuilt image
 
 - Clone the Repository:
 
@@ -21,23 +21,15 @@ cd hubzilla-docker
 ```
 
 - Configure Your Environment: Update the `.env` file with your SMTP and database details.
-- Build and Run the Container:
+- Run the Container:
 
 ```
-docker compose up --build -d
-```
-
-or the following if you need a clean rebuild:
-
-```
-docker build --no-cache -t hubzilla -f Dockerfile .
 docker compose up -d
 ```
 
 ### building image
 
 Replace the following
-
 
 ```
 image: ghcr.io/saiwal/hubzilla-docker:latest
@@ -62,9 +54,16 @@ with:
 
 ```
 
-and to deploy:
+- Build and Run the Container:
 
 ```
+docker compose up -d
+```
+
+or the following if you need a clean rebuild:
+
+```
+docker build --no-cache -t hubzilla -f Dockerfile .
 docker compose up -d
 ```
 
