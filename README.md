@@ -101,6 +101,25 @@ Using Docker for Hubzilla provides several advantages:
 - SMTP environment variables are necessary for admin registration. Make sure they are specified in the `.env` files correctly. Use app passwords if necessary for services with TFA(gmail, etc.).
 - Upload size limit is controlled by custom-php.ini, currently set to 20MB. Change if needed to appropriate value.
 
+## Adjusting for use behind a reverse proxy
+
+If you are exposing the containers to the public behind a reverse proxy, some additional steps are needed for logging in the IP addresses of visitors:
+
+1. Access the console of your app container by `docker exec -it <container name> bash`.
+2. Enable the `mod_remoteip` module in apache `a2enmod remoteip`.
+3. Update the apache configuration, add the following to `/etc/apache2/sites-enabled/default000.conf` and replace the IP with the IP of the reverse proxy.
+
+```
+    <IfModule mod_remoteip.c>
+        RemoteIPHeader X-Forwarded-For
+        # Specify the trusted proxy IPs (replace with your Reverse Proxy IP or network)
+        RemoteIPTrustedProxy <REVERSE_PROXY_IP>
+    </IfModule>
+```
+
+4. Restart apache with `systemctl restart apache2`.
+5. Check the logs with `docker compose logs --follow --tail=50`.
+
 ## TODO
 
 - [ ] Optimize image size.
