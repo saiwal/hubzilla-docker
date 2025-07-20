@@ -67,7 +67,7 @@ docker build --no-cache -t hubzilla -f Dockerfile .
 docker compose up -d
 ```
 
-Access Your Hubzilla Instance: Navigate to http://localhost (or the appropriate URL) to view your Hubzilla instance.
+Access Your Hubzilla Instance: Navigate to https://domain.tld (or the appropriate URL) to view your Hubzilla instance.
 
 ## Updating
 
