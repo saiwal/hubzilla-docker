@@ -87,6 +87,8 @@ docker exec -it <hubzilla_container_name> bash
 
 and use `nano` or `vim` to edit `.htconfig.php`
 
+You may refer to the [official mariadb instructions](https://mariadb.com/docs/server/server-management/install-and-upgrade-mariadb/installing-mariadb/binary-packages/automated-mariadb-deployment-and-administration/docker-and-mariadb/installing-and-using-mariadb-via-docker) for accessing, configuring and optimizing your database.
+
 ## Why Docker?
 
 Using Docker for Hubzilla provides several advantages:
