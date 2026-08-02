@@ -20,10 +20,18 @@ chmod 640 /etc/ssmtp/revaliases
 if [ ! -d "$WORK_DIR/.git" ]; then
     echo "Cloning Hubzilla repository..."
     su www-data -s /bin/bash -c "git clone $REPO_URL $WORK_DIR"
-    su www-data -s /bin/bash -c "util/add_addon_repo https://framagit.org/hubzilla/addons.git addons-official" 
+    su www-data -s /bin/bash -c "util/add_addon_repo https://framagit.org/hubzilla/addons.git addons-official"
 else
     echo "Updating Hubzilla repository..."
     su www-data -s /bin/bash -c "git pull origin master"
+fi
+
+if [ ! -d "$WORK_DIR/extend/theme/utsukta-themes/.git" ]; then
+    echo "Cloning theme repository..."
+    su www-data -s /bin/bash -c "util/add_theme_repo https://github.com/saiwal/Utsukta-hub-themes.git utsukta-themes"
+else
+    echo "Updating theme repository..."
+    su www-data -s /bin/bash -c "util/update_theme_repo utsukta-themes"
 fi
 
 # Pull latest changes

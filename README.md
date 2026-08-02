@@ -6,6 +6,7 @@
 - Multi-arch prebuilt images available for amd64, arm64, arm/v7.
 - Continuous Updates: The Docker image is built to allow for easy updates whenever new changes are made to the Hubzilla core or its dependencies.
 - SMTP Integration: Built-in support for sending emails using [ssmtp](https://wiki.archlinux.org/title/SSMTP), making it easy to configure email notifications for your Hubzilla instance.
+- Ships with the [Utsukta hub themes](https://github.com/saiwal/Utsukta-hub-themes) repo (including `solidified`, the SPA theme), auto updates on first start and subsequent container restarts.
 
 ## Getting started
 
