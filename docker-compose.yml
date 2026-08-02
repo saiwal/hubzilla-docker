@@ -35,6 +35,7 @@ services:
     image: ghcr.io/saiwal/hubzilla-docker:latest
     container_name: hubzilla_app
     environment:
+      HUBZILLA_VERSION: ${HUBZILLA_VERSION:-master} # branch (master, dev) to track, or a release tag (e.g. 9.4.4) to pin
       HUBZILLA_DB_HOST: db
       HUBZILLA_DB_USER: ${DB_USER}              # Use variable from .env
       HUBZILLA_DB_PASS: ${DB_PASS}          # Use variable from .env

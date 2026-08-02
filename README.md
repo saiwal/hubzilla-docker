@@ -78,6 +78,16 @@ Simply restart the container and it will pull the latest version of hubzilla fro
 docker compose restart
 ```
 
+## Pinning/switching Hubzilla version
+
+By default (`HUBZILLA_VERSION=master` in `.env`) the container tracks the `master` branch and updates on every restart. Set `HUBZILLA_VERSION` to a branch (e.g. `dev`) to track a different branch instead, or to a release tag (e.g. `9.4.4`) to pin to that exact version — pinned checkouts stop auto-updating on restart. Change the value in `.env` and restart:
+
+```
+docker compose restart
+```
+
+Prebuilt images are also tagged with the Hubzilla version current at build time (e.g. `ghcr.io/saiwal/hubzilla-docker:9.4.4`) in addition to `:latest`, for traceability — note this only reflects what version was current when the image was built, it does not pin the container's Hubzilla checkout (use `HUBZILLA_VERSION` for that).
+
 ## Advanced hub configuration
 
 To edit `.htconfig.php` for configuring advanced hubzilla features connect to container using:
