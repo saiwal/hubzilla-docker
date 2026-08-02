@@ -33,6 +33,9 @@ RUN a2enmod rewrite
 # Enable Apache mod_headers
 RUN a2enmod headers
 
+# Allow root to run git commands in www-data-owned repos (manual util/* runs via docker exec)
+RUN git config --global --add safe.directory '*'
+
 # Set working directory
 WORKDIR /var/www/html
 
