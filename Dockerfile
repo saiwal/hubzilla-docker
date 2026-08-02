@@ -1,5 +1,5 @@
 # Use an official PHP image as a base
-FROM php:8.3-apache
+FROM php:8.2-apache
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
@@ -11,15 +11,18 @@ RUN apt-get update && apt-get install -y \
     libzip-dev \
     libicu-dev \
     libgmp-dev \
+    imagemagick \
+    libmagickwand-dev \
     zip \
     unzip \
     mariadb-client \
     git \
     cron \
-    gettext \  
+    gettext \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) gd \
-    && docker-php-ext-install pdo pdo_mysql zip exif intl bcmath gmp
+    && docker-php-ext-install pdo pdo_mysql zip exif intl bcmath gmp \
+    && pecl install imagick && docker-php-ext-enable imagick
 
 # Copy the custom php.ini
 COPY custom-php.ini /usr/local/etc/php/conf.d/uploads.ini
