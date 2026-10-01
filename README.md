@@ -21,7 +21,13 @@ git clone https://github.com/saiwal/hubzilla-docker.git
 cd hubzilla-docker
 ```
 
-- Configure Your Environment: Update the `.env` file with your SMTP and database details.
+- Configure Your Environment: Copy the example files, then update `.env` with your SMTP and database details (both copies are gitignored):
+
+```
+cp .env.example .env
+cp docker-compose.yml.example docker-compose.yml
+```
+
 - Run the Container:
 
 ```
@@ -88,6 +94,16 @@ docker compose restart
 
 Prebuilt images are also tagged with the Hubzilla version current at build time (e.g. `ghcr.io/saiwal/hubzilla-docker:9.4.4`) in addition to `:latest`, for traceability — note this only reflects what version was current when the image was built, it does not pin the container's Hubzilla checkout (use `HUBZILLA_VERSION` for that).
 
+## Custom core/addon/theme repos
+
+Set these in `.env` and restart:
+
+- `HZ_REPO` — Hubzilla core repo (default `https://framagit.org/hubzilla/core.git`).
+- `ADDON_REPOS` / `THEME_REPOS` — comma-separated `<url> <name> [tag]` entries, e.g.
+  `ADDON_REPOS=https://framagit.org/hubzilla/addons.git addons-official 9.4.4, https://example.com/more.git more-addons`
+
+New repos are added on the next restart and unpinned repos are updated on every restart. The optional tag pins a repo to that release tag; drop it to return the repo to its default branch. Removing an entry does not delete an already-added repo.
+
 ## Advanced hub configuration
 
 To edit `.htconfig.php` for configuring advanced hubzilla features connect to container using:
@@ -136,7 +152,7 @@ If you are exposing the containers to the public behind a reverse proxy, some ad
 ## TODO
 
 - [ ] Optimize image size.
-- [ ] Option to add custom addon/theme repos.
+- [x] Option to add custom addon/theme repos.
 - [ ] Explore other database systems (Postgres, etc.)
 - [ ] Add option to enable apps, account quotas, and other configuration options.
 
