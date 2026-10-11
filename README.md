@@ -1,5 +1,16 @@
 # Hubzilla-docker
 
+> **Upgrading from an older checkout?** `.env` and `docker-compose.yml` are now gitignored; the repo ships `.env.example` and `docker-compose.yml.example` instead. A plain `git pull` will fail (or delete your `docker-compose.yml`), so keep your copies aside while pulling:
+>
+> ```
+> cp .env .env.bak; cp docker-compose.yml docker-compose.yml.bak
+> git checkout -- .env docker-compose.yml
+> git pull
+> mv .env.bak .env; mv docker-compose.yml.bak docker-compose.yml
+> ```
+>
+> Existing `.env` files keep working: the new `HZ_REPO`, `ADDON_REPOS` and `THEME_REPOS` settings default to the previous built-in repos. See `.env.example` to customise them.
+
 ## Features:
 
 - Use Docker Compose to set up a fully functional [Hubzilla](https://hubzilla.org/page/info/discover) instance with just a few commands.
