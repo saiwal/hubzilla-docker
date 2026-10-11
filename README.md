@@ -103,7 +103,7 @@ By default (`HUBZILLA_VERSION=master` in `.env`) the container tracks the `maste
 docker compose restart
 ```
 
-Prebuilt images are also tagged with the Hubzilla version current at build time (e.g. `ghcr.io/saiwal/hubzilla-docker:9.4.4`) in addition to `:latest`, for traceability — note this only reflects what version was current when the image was built, it does not pin the container's Hubzilla checkout (use `HUBZILLA_VERSION` for that).
+Prebuilt images are also tagged with the Hubzilla version current at build time (e.g. `ghcr.io/saiwal/hubzilla-docker:9.4.4`, overwritten by later rebuilds) and with that version plus the image's PHP version (e.g. `:9.4.4-php8.4`) in addition to `:latest`, for traceability — note this only reflects what version was current when the image was built, it does not pin the container's Hubzilla checkout (use `HUBZILLA_VERSION` for that).
 
 ## Custom core/addon/theme repos
 
