@@ -1,6 +1,9 @@
 # Use an official PHP image as a base
 FROM php:8.4-apache
 
+# PIE (PECL replacement); a phar so it works on every arch we build
+ADD --chmod=755 https://github.com/php/pie/releases/latest/download/pie.phar /usr/local/bin/pie
+
 # Install dependencies
 RUN apt-get update && apt-get install -y \
     nano vim \
@@ -22,7 +25,7 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) gd \
     && docker-php-ext-install pdo pdo_mysql zip exif intl bcmath gmp \
-    && pecl install imagick && docker-php-ext-enable imagick
+    && pie install imagick/imagick && docker-php-ext-enable imagick
 
 # Copy the custom php.ini
 COPY custom-php.ini /usr/local/etc/php/conf.d/uploads.ini
